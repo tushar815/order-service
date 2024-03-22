@@ -21,20 +21,19 @@ public class OrderControllerWebFluxTests {
     @Autowired
     private WebTestClient webTestClient;
 
-
     @MockBean
     private OrderService orderService;
 
     @Test
     void whenBookNotAvailableThenRejectOrder(){
-        var orderRequest = new OrderRequest("123456788", 3);
+        var orderRequest = new OrderRequest("1234567890", 3);
         var expectedOrder = OrderService.buildRejectedOrder(orderRequest.isbn(), orderRequest.quantity());
         given(orderService.submitOrder(orderRequest.isbn(), orderRequest.quantity()))
                 .willReturn(Mono.just(expectedOrder));
 
         webTestClient
                 .post()
-                .uri("/orders/")
+                .uri("/orders")
                 .bodyValue(orderRequest)
                 .exchange()
                 .expectStatus().is2xxSuccessful()
