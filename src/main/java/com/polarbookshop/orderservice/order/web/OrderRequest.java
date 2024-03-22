@@ -1,4 +1,4 @@
-package com.polarbookshop.orderservice.order;
+package com.polarbookshop.orderservice.order.web;
 
 import jakarta.validation.constraints.*;
 
